@@ -116,23 +116,26 @@ export class TaskManager {
       });
   }
 
-  markDone(args: string[]) {
-    console.log("Feature not yet implemented");
+  async markDone(args: string[]) {
+    // check if the Id is provided
+    if (args.length < 1)
+      return console.log("No enought arguments: You should provide a task id");
+
+    // check if task exist
+    const task = await db.findTask(parseInt(args[0]));
+    if (!task) return console.log(`Task with id ${args[0]} not found.`);
+
+    // update the task
+    task.status = "done";
+    db.update(task)
+      .then(() => {
+        console.log("Task marked done successfully");
+      })
+      .catch((err) => {
+        console.error("An error occured while updating the task", err);
+      });
   }
 }
-
-// class comand {
-//   constructor(argsNb, callFn) {
-//     this.argsNb = argsNb;
-//     this.callFn = callFn;
-//   }
-
-//   execute(args) {
-//     if (args.lenght > this.argsNb)
-//       throw new Error("You provided more arguments than expected");
-//     this.callFn(args);
-//   }
-// }
 
 export class Task {
   id: number;
