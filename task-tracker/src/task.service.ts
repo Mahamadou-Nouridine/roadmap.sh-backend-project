@@ -59,7 +59,8 @@ export class TaskManager {
     if (!task) return console.log(`Task with id ${args[0]} not found.`);
 
     // update the task
-    db.update(parseInt(args[0]), args[1])
+    task.description = args[1];
+    db.update(task)
       .then(() => {
         console.log("Task updated successfully");
       })
@@ -86,7 +87,7 @@ export class TaskManager {
       });
   }
 
-  async list(args: string[]) {
+  async list() {
     const tasks = await db.getDbData();
     taskFormat.displayHeader();
     taskFormat.displaySeparator();
@@ -95,8 +96,24 @@ export class TaskManager {
     });
   }
 
-  markInProgress(args: string[]) {
-    console.log("Feature not yet implemented");
+  async markInProgress(args: string[]) {
+    // check if the Id is provided
+    if (args.length < 1)
+      return console.log("No enought arguments: You should provide a task id");
+
+    // check if task exist
+    const task = await db.findTask(parseInt(args[0]));
+    if (!task) return console.log(`Task with id ${args[0]} not found.`);
+
+    // update the task
+    task.status = "in-progress";
+    db.update(task)
+      .then(() => {
+        console.log("Task marked in-progress successfully");
+      })
+      .catch((err) => {
+        console.error("An error occured while updating the task", err);
+      });
   }
 
   markDone(args: string[]) {

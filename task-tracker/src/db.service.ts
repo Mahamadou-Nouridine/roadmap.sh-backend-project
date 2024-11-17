@@ -53,11 +53,9 @@ export class Db {
     await this.updateDb(data);
   };
 
-  async update(id: number, description: string) {
-    const data = (await this.getDbData()).map((task) => {
-      if (task.id != id) return task;
-      task.description = description;
-      task.updatedAt = new Date();
+  async update(task: Task) {
+    const data = (await this.getDbData()).map((t) => {
+      if (t.id != task.id) return t;
       return task;
     });
     return this.updateDb(data);
