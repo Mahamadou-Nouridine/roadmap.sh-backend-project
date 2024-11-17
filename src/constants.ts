@@ -6,4 +6,5 @@ export enum taskStatus {
   done = "done",
 }
 
-export const FILE_PATH = path.join(__dirname, "db.json");
+export const DB_PATH = path.join(__dirname, "db.json");
+export const TEST_DB_PATH = path.join(__dirname, "db.test.json");

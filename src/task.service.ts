@@ -1,12 +1,12 @@
-const { readFile, writeFile } = require("node:fs/promises");
-import { FILE_PATH, taskStatus } from "./constants";
 import { Db } from "./db.service";
 
-const db = new Db();
+const db = new Db("prod");
 
 export class TaskManager {
   comands: Record<string, Function>;
-  constructor() {
+  // db: Db;
+  constructor(env: "dev" | "prod" = "dev") {
+    // this.db = new Db(env);
     this.comands = {
       add: this.add,
       update: this.update,
@@ -27,14 +27,41 @@ export class TaskManager {
   }
 
   add(args: string[]) {
-    if (!(args && args[0]))
-      return console.log("You should provide a task description");
-    return db.add(args[0]);
+    if (args.length < 1)
+      return console.log(
+        "No enought arguments: You should provide a task description"
+      );
+    db.add(args[0]).then(() => {
+      console.log("Task added successfully");
+    });
     // console.log("Feature not yet implemented");
   }
 
-  update(args: string[]) {
-    console.log("Feature not yet implemented");
+  async update(args: string[]) {
+    if (args.length < 2) {
+      // check if the task id is provided
+      if (!args[0])
+        return console.log(
+          "No enought arguments: You should provide a task id"
+        );
+
+      // check if the description is provided
+      if (!args[1])
+        return console.log(
+          "No enought arguments: You should provide a task id"
+        );
+    }
+
+    // check existence
+    const task = await db.findTask(parseInt(args[0]));
+
+    if (!task) return console.log(`Task with id ${args[0]} not found.`);
+
+    // update the task
+    db.update(parseInt(args[0]), args[1]).then(() => {
+      console.log("Task updated successfully");
+    });
+    // console.log("Feature not yet implemented");
   }
 
   delete(args: string[]) {
