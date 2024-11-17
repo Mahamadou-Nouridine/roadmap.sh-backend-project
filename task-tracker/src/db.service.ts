@@ -29,6 +29,11 @@ export class Db {
   async findTask(id: number) {
     return (await this.getDbData()).find((d) => d.id == id);
   }
+
+  async deleteOne(id: number) {
+    const data = await this.getDbData();
+    return this.updateDb(data.filter((t) => t.id !== id));
+  }
   add = async (description: string) => {
     // get the current data array
     const data = await this.getDbData();

@@ -1,12 +1,14 @@
 import { Db } from "./db.service";
+import { TaskFormat } from "./utils/task-format";
 
 const db = new Db();
+const taskFormat = new TaskFormat();
 
 export class TaskManager {
   comands: Record<string, Function>;
   // db: Db;
   constructor(env: "dev" | "prod" = "prod") {
-    db.setEnv(env)
+    db.setEnv(env);
     this.comands = {
       add: this.add,
       update: this.update,
@@ -57,13 +59,40 @@ export class TaskManager {
     if (!task) return console.log(`Task with id ${args[0]} not found.`);
 
     // update the task
-    db.update(parseInt(args[0]), args[1]).then(() => {
-      console.log("Task updated successfully");
-    });
+    db.update(parseInt(args[0]), args[1])
+      .then(() => {
+        console.log("Task updated successfully");
+      })
+      .catch((err) => {
+        console.error("An error occured while updating the task", err);
+      });
   }
 
-  delete(args: string[]) {
-    console.log("Feature not yet implemented");
+  async delete(args: string[]) {
+    // check if the Id is provided
+    if (args.length < 1)
+      return console.log("No enought arguments: You should provide a task id");
+
+    // check if task exist
+    const task = await db.findTask(parseInt(args[0]));
+    if (!task) return console.log(`Task with id ${args[0]} not found.`);
+
+    db.deleteOne(parseInt(args[0]))
+      .then(() => {
+        console.log("Task deleted successfully");
+      })
+      .catch((err) => {
+        console.error("An error occured while deleting the task", err);
+      });
+  }
+
+  async list(args: string[]) {
+    const tasks = await db.getDbData();
+    taskFormat.displayHeader();
+    taskFormat.displaySeparator();
+    tasks.forEach((t) => {
+      taskFormat.printSingleTask(t);
+    });
   }
 
   markInProgress(args: string[]) {
@@ -71,10 +100,6 @@ export class TaskManager {
   }
 
   markDone(args: string[]) {
-    console.log("Feature not yet implemented");
-  }
-
-  list(args: string[]) {
     console.log("Feature not yet implemented");
   }
 }
