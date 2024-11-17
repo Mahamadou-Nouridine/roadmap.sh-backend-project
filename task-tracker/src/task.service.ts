@@ -87,13 +87,20 @@ export class TaskManager {
       });
   }
 
-  async list() {
+  async list(args: string[]) {
     const tasks = await db.getDbData();
-    taskFormat.displayHeader();
-    taskFormat.displaySeparator();
-    tasks.forEach((t) => {
-      taskFormat.printSingleTask(t);
-    });
+    let taskToDisplay = tasks;
+    if (args.length > 0) {
+      if (!["done", "in-progress", "todo"].includes(args[0])) {
+        console.log('the status should be: "in-progress", "todo", "done ');
+
+        return;
+      }
+
+      taskToDisplay = tasks.filter(t => t.status === args[0])
+    }
+
+    taskFormat.listTasks(taskToDisplay);
   }
 
   async markInProgress(args: string[]) {

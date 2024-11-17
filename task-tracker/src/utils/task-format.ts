@@ -10,7 +10,15 @@ export class TaskFormat {
     this.createdAtCol = `Created At${" ".repeat(20)}`;
     this.updatedAtCol = `Updated At${" ".repeat(20)}`;
     this.taskCol = `Task${" ".repeat(35)}`;
-    this.statusCol = `Status${" ".repeat(5)}`;
+    this.statusCol = `Status${" ".repeat(10)}`;
+  }
+
+  listTasks(tasks: Task[]) {
+    this.displayHeader();
+    this.displaySeparator();
+    tasks.forEach((t) => {
+      this.printSingleTask(t);
+    });
   }
   displayHeader() {
     console.log(
