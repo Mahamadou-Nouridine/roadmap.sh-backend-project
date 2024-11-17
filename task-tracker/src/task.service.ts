@@ -1,12 +1,12 @@
 import { Db } from "./db.service";
 
-const db = new Db("prod");
+const db = new Db();
 
 export class TaskManager {
   comands: Record<string, Function>;
   // db: Db;
-  constructor(env: "dev" | "prod" = "dev") {
-    // this.db = new Db(env);
+  constructor(env: "dev" | "prod" = "prod") {
+    db.setEnv(env)
     this.comands = {
       add: this.add,
       update: this.update,
@@ -34,7 +34,6 @@ export class TaskManager {
     db.add(args[0]).then(() => {
       console.log("Task added successfully");
     });
-    // console.log("Feature not yet implemented");
   }
 
   async update(args: string[]) {
@@ -61,7 +60,6 @@ export class TaskManager {
     db.update(parseInt(args[0]), args[1]).then(() => {
       console.log("Task updated successfully");
     });
-    // console.log("Feature not yet implemented");
   }
 
   delete(args: string[]) {

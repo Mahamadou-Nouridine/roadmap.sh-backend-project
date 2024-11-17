@@ -6,7 +6,7 @@ import { existsSync, writeFile as writeSync } from "node:fs";
 export class Db {
   env: "dev" | "prod";
   logger: any;
-  constructor(env: "dev" | "prod" = "dev") {
+  constructor(env: "dev" | "prod" = "prod") {
     this.env = env;
     this.logger =
       env == "prod"
@@ -18,6 +18,11 @@ export class Db {
         : console;
 
     this.logger.log("Initialized a db");
+    this.ensureDbExistence(env);
+  }
+
+  setEnv(env: "dev" | "prod") {
+    this.env = env;
     this.ensureDbExistence(env);
   }
 
