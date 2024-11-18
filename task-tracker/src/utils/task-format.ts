@@ -13,6 +13,10 @@ export class TaskFormat {
     this.statusCol = `Status${" ".repeat(10)}`;
   }
 
+  /**
+   * List all tasks with their details.
+   * @param {Task[]} tasks - An array of task objects to be listed.
+   */
   listTasks(tasks: Task[]) {
     this.displayHeader();
     this.displaySeparator();
@@ -26,18 +30,25 @@ export class TaskFormat {
     );
   }
 
+  /**
+   * Display the separator between the header and the values.
+   */
   displaySeparator() {
     console.log(
       `${"-".repeat(this.idCol.length)}|${"-".repeat(
-        this.taskCol.length+1
+        this.taskCol.length + 1
       )}|${"-".repeat(this.statusCol.length + 1)}|${"-".repeat(
         this.createdAtCol.length + 1
       )}|${"-".repeat(this.updatedAtCol.length)}`
     );
   }
 
+  /**
+   * Display a single task.
+   * @param {Task} task - The task object to be displayed.
+   */
   printSingleTask(task: Task) {
-    const id = this.formatEntry(task.id, this.idCol.length, true);
+    const id = this.formatEntry(task.id, this.idCol.length);
     const description = this.formatEntry(task.description, this.taskCol.length);
     const status = this.formatEntry(task.status, this.statusCol.length);
     const createdAt = this.formatEntry(
@@ -53,7 +64,13 @@ export class TaskFormat {
     );
   }
 
-  formatEntry(rawEntry: string | number, max: number, start: boolean = false) {
+  /**
+   * Format a single entry, such as id, description, etc.
+   * @param {string|number} rawEntry - The entry value, e.g., id, description, etc.
+   * @param {number} max - The maximum length of the formatted entry.
+   * @returns {string} - The formatted entry string.
+   */
+  private formatEntry(rawEntry: string | number, max: number) {
     const entry = rawEntry.toString();
     if (entry.length > max) {
       return `${this.truncate(entry, { size: max - 3, separator: "." })}`;
@@ -65,13 +82,26 @@ export class TaskFormat {
     }`;
   }
 
-  truncate(t: string, options: { separator: string; size: number }) {
+  /**
+   * Truncate a string to a specified length, adding a separator if necessary.
+   * @param {string} t - The string to be truncated.
+   * @param {Object} options - The options for truncating the string.
+   * @param {string} options.separator - The separator to use when truncating.
+   * @param {number} options.size - The maximum size of the truncated string.
+   * @returns {string} - The truncated string.
+   */
+  private truncate(
+    t: string,
+    options: { separator: string; size: number }
+  ): string {
     if (t) {
       let truncated = t.slice(0, options.size);
       truncated = truncated.trim();
-      if (t.length > options.size)
+      if (t.length > options.size) {
         truncated = `${truncated}${options.separator.repeat(3)}`;
+      }
       return truncated;
     }
+    return "";
   }
 }
