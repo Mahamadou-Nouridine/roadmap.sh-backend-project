@@ -1,4 +1,5 @@
 import { Db } from "./db.service";
+import { TaskManagerHelper } from "./taksHelpManager";
 import { TaskFormat } from "./utils/task-format";
 
 // Create instances of Db and TaskFormat to manage database and format tasks.
@@ -9,7 +10,11 @@ export class TaskManager {
   // A record object mapping command names to corresponding handler functions
   comands: Record<string, Function>;
 
-  // Constructor to initialize the TaskManager with the specified environment ("dev" or "prod").
+  /**
+   * Initializes the TaskManager with the specified environment ("dev" or "prod").
+   *
+   * @param env The environment for the db instance ("dev" or "prod"), defaults to "prod"
+   */
   constructor(env: "dev" | "prod" = "prod") {
     // Set the environment for the db instance
     db.setEnv(env);
@@ -22,6 +27,7 @@ export class TaskManager {
       "mark-in-progress": this.markInProgress, // Mark a task as in-progress
       "mark-done": this.markDone, // Mark a task as done
       list: this.list, // List tasks with optional status filtering
+      "--help": this.help, // helper utility
     };
   }
 
@@ -31,6 +37,9 @@ export class TaskManager {
    * @param args The command and its arguments
    */
   router(args: string[]) {
+    if (!args || !args[0]) {
+      return this.help();
+    }
     const comand = args[0];
 
     // Check if the command exists in the defined list of commands
@@ -138,6 +147,28 @@ export class TaskManager {
 
     // Display the tasks using the TaskFormat class
     taskFormat.listTasks(taskToDisplay);
+  }
+
+  /**
+   * Helper function for using the CLI.
+   * Displays information on available commands or command-specific help.
+   *
+   * @param args Optional command to get help for (default shows help for all commands)
+   */
+  async help(args?: string[]) {
+    if (args && args[0]) return TaskManagerHelper.getHelp(args[0]);
+    [
+      "add",
+      "update",
+      "delete",
+      "mark-in-progress",
+      "mark-done",
+      "list",
+      "--help",
+    ].forEach((c) => {
+      TaskManagerHelper.getHelp(c);
+      console.log();
+    });
   }
 
   /**
