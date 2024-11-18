@@ -103,7 +103,7 @@ To run the project, execute the following command:
   - **Description**: Adding a new task
   - **arguments**:
     - `<description>`: The task description
-  - **example**: `task-cli add "Buy groceries"`
+  - **example**: `./task-cli.sh add "Buy groceries"`
 
 - [ ] `update <id> <new_description>`
 
@@ -111,40 +111,47 @@ To run the project, execute the following command:
   - **arguments**:
     - `<id>`: The ID of the task to update
     - `<new_description>`: The new description of the task
-  - **example**: `task-cli update 1 "Buy groceries and cook dinner"`
+  - **example**: `./task-cli.sh update 1 "Buy groceries and cook dinner"`
 
 - [ ] `delete <id>`
 
   - **Description**: Deleting a task
   - **arguments**:
     - `<id>`: The ID of the task to delete
-  - **example**: `task-cli delete 1`
+  - **example**: `./task-cli.sh delete 1`
 
 - [ ] `mark-in-progress <id>`
 
   - **Description**: Marking a task as in progress
   - **arguments**:
     - `<id>`: The ID of the task to mark as in progress
-  - **example**: `task-cli mark-in-progress 1`
+  - **example**: `./task-cli.sh mark-in-progress 1`
 
 - [ ] `mark-done <id>`
 
   - **Description**: Marking a task as done
   - **arguments**:
     - `<id>`: The ID of the task to mark as done
-  - **example**: `task-cli mark-done 1`
+  - **example**: `./task-cli.sh mark-done 1`
 
 - [ ] `list`
 
   - **Description**: Listing all tasks
   - **arguments**: None
-  - **example**: `task-cli list`
+  - **example**: `./task-cli.sh list`
 
 - [ ] `list <status>`
+
   - **Description**: Listing tasks by status
   - **arguments**:
     - `<status>`: The status of the tasks to list (e.g., `done`, `todo`, `in-progress`)
-  - **example**: `task-cli list done`
+  - **example**: `./task-cli.sh list done`
+
+- [ ] `--help [command]`
+  - **Description**: Displaying help for a specific command
+  - **Arguments**:
+    - `[command]`: The command to get help for (optional)
+  - **Example**: `./task-cli.sh --help add` or `./task-cli.sh --help`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
