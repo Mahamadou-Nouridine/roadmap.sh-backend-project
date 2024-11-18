@@ -11,7 +11,6 @@
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
-  - [🚀 Live Demo ](#-live-demo-)
   - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -46,12 +45,6 @@ The **Task Tracker** Application is a command-line tool for managing tasks. Each
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Live Demo <a name="live-demo"></a>
-
-- [Live Demo Link](https://Mahamadou-Nouridine.github.io/My-Portfolio/)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## 💻 Getting Started <a name="getting-started"></a>
 
 To get a local copy up and running, follow these steps.
@@ -67,13 +60,13 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone https://github.com/mahamadou-nouridine/My-Portfolio.git <my-folder>
+  git clone https://github.com/Mahamadou-Nouridine/roadmap.sh-backend-project.git <my-folder>
 ```
 
 navigate in the folder:
 
 ```sh
-  cd <my-folder>
+  cd <my-folder>/task-tracker
 ```
 
 Setup the application (with script, manually):
