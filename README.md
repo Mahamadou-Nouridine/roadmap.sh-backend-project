@@ -1,6 +1,6 @@
 # 🚀 Roadmap.sh Backend Projects
 
-Welcome to my collection of backend projects inspired by **roadmap.sh**. This repository contains projects that align with the learning paths provided by **roadmap.sh**, which is a platform that helps developers and engineers build their skills in a structured way. Currently, the repository contains the **Task Tracker** project.
+Welcome to my collection of backend projects inspired by **roadmap.sh**. This repository contains projects that align with the learning paths provided by **roadmap.sh**, which is a platform that helps developers and engineers build their skills in a structured way.
 
 ---
 
