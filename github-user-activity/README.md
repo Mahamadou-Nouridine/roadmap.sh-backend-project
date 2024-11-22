@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h3><b>Task Tracker</b></h3>
+  <h3><b>GitHub User Activity</b></h3>
 </div>
 
 # 📗 Table of Contents
@@ -11,7 +11,7 @@
 - [🔗 Project Source ](#-project-source-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
-    - [Key Features ](#key-features-)
+    - [Key Feature ](#key-feature-)
   - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -26,29 +26,25 @@
 
 # 📖 About <a name="about-project"></a>
 
-The **Task Tracker** Application is a command-line tool for managing tasks. Each task has an ID, timestamp, description, and status. The statuses are: `todo`, `in-progress`, and `done`. The CLI supports adding, updating, deleting, listing tasks, and changing their status.
+The **GitHub User Activity** Application is a command-line tool for viewing a given Github user activities.
 
 # 🔗 Project Source <a name="source"></a>
 
 This project is part of the Roadmap.sh initiative. Roadmap.sh is a platform that provides detailed, interactive roadmaps for developers to guide their learning and career progression. You can explore more projects and resources on their platform to help you on your development journey.
 
-**Project link:** https://roadmap.sh/projects/task-tracker
+**Project link:** https://roadmap.sh/projects/github-user-activity
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
 - **Typescript**
+- **Node.js**
 - **Bash**
 
-### Key Features <a name="key-features"></a>
+### Key Feature <a name="key-features"></a>
 
-- [ ] **Add, Update, and Delete tasks**
-- [ ] **Mark a task as in progress or done**
-- [ ] **List all tasks**
-- [ ] **List all tasks that are done**
-- [ ] **List all tasks that are not done**
-- [ ] **List all tasks that are in progress**
+- [ ] **List Github user activities**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -73,7 +69,7 @@ Clone this repository to your desired folder:
 navigate in the folder:
 
 ```sh
-  cd <my-folder>/task-tracker
+  cd <my-folder>/github-user-activity
 ```
 
 Setup the application (with script, manually):
@@ -97,7 +93,7 @@ Setup the application (with script, manually):
 
 To run the project, execute the following command:
 
-> Run `chmod u+x task-cli.sh` if it is not executing
+> Run `chmod u+x github-activity.sh` if it is not executing
 
 ```sh
   ./task-cli <command> [args]
@@ -105,60 +101,12 @@ To run the project, execute the following command:
 
 #### Available commands
 
-- [ ] `add <description>`
+- [ ] `<username>`
 
-  - **Description**: Adding a new task
+  - **Description**: Listing <username> activities on github
   - **arguments**:
-    - `<description>`: The task description
-  - **example**: `./task-cli.sh add "Buy groceries"`
-
-- [ ] `update <id> <new_description>`
-
-  - **Description**: Updating an existing task
-  - **arguments**:
-    - `<id>`: The ID of the task to update
-    - `<new_description>`: The new description of the task
-  - **example**: `./task-cli.sh update 1 "Buy groceries and cook dinner"`
-
-- [ ] `delete <id>`
-
-  - **Description**: Deleting a task
-  - **arguments**:
-    - `<id>`: The ID of the task to delete
-  - **example**: `./task-cli.sh delete 1`
-
-- [ ] `mark-in-progress <id>`
-
-  - **Description**: Marking a task as in progress
-  - **arguments**:
-    - `<id>`: The ID of the task to mark as in progress
-  - **example**: `./task-cli.sh mark-in-progress 1`
-
-- [ ] `mark-done <id>`
-
-  - **Description**: Marking a task as done
-  - **arguments**:
-    - `<id>`: The ID of the task to mark as done
-  - **example**: `./task-cli.sh mark-done 1`
-
-- [ ] `list`
-
-  - **Description**: Listing all tasks
-  - **arguments**: None
-  - **example**: `./task-cli.sh list`
-
-- [ ] `list <status>`
-
-  - **Description**: Listing tasks by status
-  - **arguments**:
-    - `<status>`: The status of the tasks to list (e.g., `done`, `todo`, `in-progress`)
-  - **example**: `./task-cli.sh list done`
-
-- [ ] `--help [command]`
-  - **Description**: Displaying help for a specific command
-  - **Arguments**:
-    - `[command]`: The command to get help for (optional)
-  - **Example**: `./task-cli.sh --help add` or `./task-cli.sh --help`
+    - `<username>`: the user username
+  - **example**: `./github-activity.sh mahamadou-nouridine`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,7 +122,9 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Use binary search algorithm to reduice the time complexity of look-up**
+- [ ] **Add caching for request optimisation**
+- [ ] **Activity filtering parameter: --filter \<activity-type\>**
+- [ ] **Use tabular display**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
