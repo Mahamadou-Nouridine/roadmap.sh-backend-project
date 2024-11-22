@@ -233,6 +233,270 @@ interface PublicEvent extends BaseEvent {
   action: "publicized" | "privatized";
 }
 
+interface MemberEvent extends BaseEvent {
+  type: "MemberEvent";
+  payload: {
+    action: "added" | "removed"; // Indicates whether a member was added or removed
+    member: {
+      login: string;
+      id: number;
+      avatar_url: string;
+      url: string;
+    };
+  };
+}
+
+interface ReleaseEvent extends BaseEvent {
+  type: "ReleaseEvent";
+  payload: {
+    action: "created" | "edited" | "deleted"; // Possible actions regarding the release
+    release: {
+      id: number;
+      tag_name: string;
+      name: string;
+      body: string;
+      created_at: string;
+      published_at: string | null;
+      url: string;
+      author: {
+        login: string;
+        id: number;
+        avatar_url: string;
+        url: string;
+      };
+    };
+  };
+}
+
+interface IssueCommentEvent extends BaseEvent {
+  type: "IssueCommentEvent";
+  payload: {
+    action: "created" | "edited" | "deleted"; // Actions that can be performed on a comment
+    comment: {
+      id: number;
+      body: string;
+      user: {
+        login: string;
+        id: number;
+        avatar_url: string;
+        url: string;
+      };
+      created_at: string;
+      updated_at: string;
+    };
+    issue: {
+      id: number;
+      number: number;
+      title: string;
+      user: {
+        login: string;
+        id: number;
+        avatar_url: string;
+        url: string;
+      };
+      body: string;
+    };
+  };
+}
+
+interface CommitCommentEvent extends BaseEvent {
+  type: "CommitCommentEvent";
+  payload: {
+    action: "created" | "edited" | "deleted"; // Actions regarding the commit comment
+    comment: {
+      id: number;
+      body: string;
+      user: {
+        login: string;
+        id: number;
+        avatar_url: string;
+        url: string;
+      };
+      created_at: string;
+      updated_at: string;
+    };
+    commit_id: string;
+  };
+}
+
+interface RepoEvent extends BaseEvent {
+  type: "RepoEvent";
+  payload: {
+    action: "created" | "deleted"; // Action indicating repo creation or deletion
+    repository: {
+      id: number;
+      name: string;
+      url: string;
+      owner: {
+        login: string;
+        id: number;
+      };
+    };
+  };
+}
+
+interface StatusEvent extends BaseEvent {
+  type: "StatusEvent";
+  payload: {
+    state: "pending" | "success" | "error" | "failure"; // Status of the commit
+    context: string; // Context of the status (like CI checks)
+    target_url: string | null; // The URL associated with the status
+    description: string | null; // Description of the status
+    commit: {
+      id: string;
+      url: string;
+    };
+  };
+}
+
+interface SponsorshipEvent {
+  id: string;
+  type: "SponsorshipEvent";
+  actor: {
+    id: number;
+    login: string;
+    display_login: string;
+    gravatar_id: string;
+    url: string;
+    avatar_url: string;
+  };
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    action: string;
+    sponsorship: {
+      id: number;
+      tier: {
+        id: number;
+        description: string;
+        monthly_price_in_cents: number;
+      };
+    };
+  };
+  created_at: string;
+}
+
+interface PullRequestReviewThreadEvent {
+  id: string;
+  type: "PullRequestReviewThreadEvent";
+  actor: {
+    id: number;
+    login: string;
+    display_login: string;
+    gravatar_id: string;
+    url: string;
+    avatar_url: string;
+  };
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    action: string;
+    pull_request: {
+      url: string;
+      id: number;
+    };
+  };
+  created_at: string;
+}
+
+interface PullRequestReviewCommentEvent {
+  id: string;
+  type: "PullRequestReviewCommentEvent";
+  actor: {
+    id: number;
+    login: string;
+    display_login: string;
+    gravatar_id: string;
+    url: string;
+    avatar_url: string;
+  };
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    action: string;
+    comment: {
+      id: number;
+      body: string;
+      created_at: string;
+    };
+    pull_request: {
+      url: string;
+      id: number;
+    };
+  };
+  created_at: string;
+}
+
+interface PullRequestReviewEvent {
+  id: string;
+  type: "PullRequestReviewEvent";
+  actor: {
+    id: number;
+    login: string;
+    display_login: string;
+    gravatar_id: string;
+    url: string;
+    avatar_url: string;
+  };
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    action: string;
+    review: {
+      id: number;
+      body: string;
+      state: string;
+    };
+    pull_request: {
+      url: string;
+      id: number;
+      number: number;
+      title: string;
+    };
+  };
+  created_at: string;
+}
+
+interface GollumEvent {
+  id: string;
+  type: "GollumEvent";
+  actor: {
+    id: number;
+    login: string;
+    display_login: string;
+    gravatar_id: string;
+    url: string;
+    avatar_url: string;
+  };
+  repo: {
+    id: number;
+    name: string;
+    url: string;
+  };
+  payload: {
+    pages: {
+      action: string;
+      page_name: string;
+      title: string;
+      html_url: string;
+      sha: string;
+    }[];
+  };
+  created_at: string;
+}
+
 // Add other event types as needed following the same pattern
 
 type GitHubEvent =
@@ -243,6 +507,16 @@ type GitHubEvent =
   | WatchEvent
   | IssuesEvent
   | PullRequestEvent
-  | PublicEvent; // and other events
-
+  | PublicEvent
+  | MemberEvent
+  | ReleaseEvent
+  | IssueCommentEvent
+  | CommitCommentEvent
+  | RepoEvent
+  | StatusEvent
+  | SponsorshipEvent
+  | PullRequestReviewThreadEvent
+  | PullRequestReviewCommentEvent
+  | PullRequestReviewEvent
+  | GollumEvent;
 type eventFormater = (event: GitHubEvent) => string;
