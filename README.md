@@ -26,7 +26,21 @@ The **Task Tracker** is a command-line tool for managing tasks. Each task has an
   - List all tasks or filter by status (done, todo, in-progress)
 - **Github link:** https://github.com/Mahamadou-Nouridine/roadmap.sh-backend-project/tree/main/task-tracker
 
-[Link to the project on roadmap.sh](https://roadmap.sh/projects/task-tracker )
+[Link to the project on roadmap.sh](https://roadmap.sh/projects/task-tracker)
+
+### 2. **GitHub User Activity**
+
+**Difficulty leve**: <span style="color:yellow">Biginner</span>
+
+**Description**:
+The **GitHub User Activity** Application is a command-line tool for viewing a given Github user activities.
+
+- **Tech Stack**: TypeScript, Bash, Node.js
+- **Features**:
+  - list user activities
+- **Github link:** https://github.com/Mahamadou-Nouridine/roadmap.sh-backend-project/tree/main/github-user-activity
+
+[Link to the project on roadmap.sh](https://roadmap.sh/projects/github-user-activity)
 
 ---
 
